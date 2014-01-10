@@ -1,0 +1,49 @@
+<?php
+
+/**
+ * @file
+ * This module supports preorder on ubercart products.
+ */
+
+/**
+ * Implements hook_permission().
+ */
+function uc_preorder_permission() {
+  return array(
+    'create preorder products' => array(
+      'title' => t('Create pre order products'),
+    ),
+    'view own pre orders' => array(
+      'title' => t('View own pre orders'),
+    ),
+    'view all pre orders' => array(
+      'title' => t('View all pre orders'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_menu().
+ */
+function uc_preorder_menu() {
+  $items = array();
+  $items['admin/store/preorder/create'] = array(
+    'title' => 'Create a Preorder Product',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('uc_preorder_create_form'),
+    'access arguments' => array('create preorder products'),
+    'file' => 'uc_preorder.admin.inc',
+  );
+  
+  $items['uc_product/autocomplete'] = array(
+    'title' => '',
+    'page callback' => 'uc_product_title_sku_autocomplete',
+    'page arguments' => array(2),
+    'access arguments' => array('create preorder products'),
+    'file path' => drupal_get_path('module', 'uc_product'),
+    'file' => '/uc_product.pages.inc',
+    'type' => MENU_CALLBACK,
+  );
+  
+  return $items;
+}

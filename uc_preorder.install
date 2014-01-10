@@ -1,0 +1,170 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the uc_preorder module.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function uc_preorder_schema() {
+  $schema['uc_preorder_booking'] = array(
+    'description' => 'Stores Pre Order Booking.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'Primary key: the pre order ID.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'nid' => array(
+        'description' => 'Product node ID.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'order_id' => array(
+        'description' => 'Order ID.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'uid' => array(
+        'description' => 'User ID.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => 0,
+      ),
+      'email' => array(
+        'description' => 'User Email ID.',
+        'type' => 'varchar',
+        'length' => 254,
+        'not null' => FALSE,
+        'default' => '',
+      ),
+      'sku' => array(
+        'description' => 'Product SKU.',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'mrp' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'price' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'booking_price' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'order_total' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'qty' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0
+      ),
+      'status' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'created' => array(
+        'description' => 'Timestamp of order when the pre order is book.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'new_order_id' => array(
+        'description' => 'New Order Id When Customer buy his preorder product after launch.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+        'default' => NULL,
+      ),
+      'payment_method' => array(
+        'description' => 'Order Payment Method.',
+        'type' => 'varchar',
+        'length' => 254,
+        'not null' => FALSE,
+        'default' => '',
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+
+  $schema['uc_preorder_products'] = array(
+    'description' => 'Stores Pre Order products information.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'Primary key: the pre order product ID.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'nid' => array(
+        'description' => 'Product node ID.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'sku' => array(
+        'description' => 'Product SKU.',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'mrp' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'offer_price' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'booking_price' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'start_date' => array(
+        'description' => 'Valid From',
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'end_date' => array(
+        'description' => 'Validity Up To',
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'launch_date' => array(
+        'description' => 'Expected Launch Date',
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'narration' => array(
+        'description' => 'Narrations',
+        'type' => 'text',
+        'length' => 40000,
+        'not null' => TRUE,
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+  return $schema;
+}
