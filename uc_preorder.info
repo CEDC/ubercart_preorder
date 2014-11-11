@@ -1,1 +1,6 @@
-name = uc_preorder
+name = Ubercart PreOrder
+description = Creates pre order products.
+core = 7.x
+package = Ubercart Preorder
+; Information added by Drupal.org packaging script on 2014-10-12
+core = "7.x"
